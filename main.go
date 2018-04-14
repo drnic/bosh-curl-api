@@ -7,9 +7,17 @@ import (
 )
 
 func main() {
-	// check that 'bosh curl' available
-	cmd := exec.Command("sh", "-c", "bosh curl -h")
+	// check that 'bosh' available
+	cmd := exec.Command("sh", "-c", "bosh -h")
 	stdoutStderr, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Printf("%s\n", stdoutStderr)
+		log.Fatal("Install 'bosh' from https://github.com/cloudfoundry/bosh-cli/pull/408")
+	}
+
+	// check that 'bosh curl' available
+	cmd = exec.Command("sh", "-c", "bosh curl -h")
+	stdoutStderr, err = cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("%s\n", stdoutStderr)
 		log.Fatal("Need 'bosh curl' from https://github.com/cloudfoundry/bosh-cli/pull/408")
