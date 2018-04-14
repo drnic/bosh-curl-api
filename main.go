@@ -9,6 +9,8 @@ import (
 func main() {
 	boshcli.Check()
 
+	fmt.Println(boshcli.GetInfo())
+
 	deployments := boshcli.GetDeployments()
 	fmt.Printf("%v\n", deployments)
 
